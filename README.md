@@ -1,2 +1,0 @@
-# home
-Spring Boot Homepage
