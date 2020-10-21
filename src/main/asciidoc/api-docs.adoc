@@ -16,3 +16,9 @@ include::{snippets}/main-controller-test/상품_조회/http-request.adoc[]
 include::{snippets}/main-controller-test/상품_조회/path-parameters.adoc[]
 include::{snippets}/main-controller-test/상품_조회/http-response.adoc[]
 include::{snippets}/main-controller-test/상품_조회/response-fields.adoc[]
+
+== 테스트 docs
+include::{snippets}/main-controller-test/테스트_테스트_코드/http-request.adoc[]
+include::{snippets}/main-controller-test/테스트_테스트_코드/request-parameters.adoc[]
+include::{snippets}/main-controller-test/테스트_테스트_코드/http-response.adoc[]
+include::{snippets}/main-controller-test/테스트_테스트_코드/response-fields.adoc[]

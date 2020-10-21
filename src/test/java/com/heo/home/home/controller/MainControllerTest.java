@@ -2,6 +2,7 @@ package com.heo.home.home.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
@@ -16,6 +17,8 @@ import static org.springframework.restdocs.request.RequestDocumentation.requestP
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.Map;
 
@@ -39,6 +42,7 @@ import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.restdocs.request.PathParametersSnippet;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -150,6 +154,47 @@ public class MainControllerTest {
             .andExpect(jsonPath("[0].name", is(notNullValue())))
             .andExpect(jsonPath("[0].desc", is(notNullValue())))
             .andExpect(jsonPath("[0].quantity", is(notNullValue())));
+    }
+
+    @Test
+    public void 테스트_테스트_코드() throws Exception{
+        mockMvc.perform(
+            get("/api/products/test")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("cnt", "5")
+                .accept(MediaType.APPLICATION_JSON))
+            // .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("test", is(true)))
+            ;
+
+        mockMvc.perform(
+            get("/api/products/test")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("cnt", "10")
+                .accept(MediaType.APPLICATION_JSON))
+            // .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().json("{'test':true}"))
+            ;
+
+        mockMvc.perform(
+            get("/api/products/test")
+                .contentType(MediaType.APPLICATION_JSON)
+                .param("cnt", "-1")
+                .accept(MediaType.APPLICATION_JSON))
+            // .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(content().json("{'test':false}"))
+            .andDo(document.document(
+                requestParameters(
+                    parameterWithName("cnt").description("카운트값")
+                ),
+                responseFields(
+                    fieldWithPath("test").description("리턴결과")
+                )
+            ))
+            ;
     }
 
 

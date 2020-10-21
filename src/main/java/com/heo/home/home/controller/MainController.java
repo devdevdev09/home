@@ -1,7 +1,9 @@
 package com.heo.home.home.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.GsonBuilder;
 import com.heo.home.home.vo.ProductDto;
@@ -52,5 +54,23 @@ public class MainController {
         String jsonString = new GsonBuilder().setPrettyPrinting().create().toJson(result);
 
         return new ResponseEntity<>(jsonString, HttpStatus.OK);
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> getTrueFalse(@RequestParam int cnt){
+        boolean result = false;
+        if(cnt > 0){
+            result = true;
+        }else{
+            result = false;
+        }
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("test", result);
+
+        String jsonString = new GsonBuilder().setPrettyPrinting().create().toJson(map);
+
+        return new ResponseEntity<>(jsonString, HttpStatus.OK);
+        // return new ResponseEntity<>(HttpStatus.OK);
     }
 }
