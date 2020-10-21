@@ -8,6 +8,7 @@ import java.util.Map;
 import com.google.gson.GsonBuilder;
 import com.heo.home.home.vo.ProductDto;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,5 +73,19 @@ public class MainController {
 
         return new ResponseEntity<>(jsonString, HttpStatus.OK);
         // return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/dailycommit/{id}")
+    public ResponseEntity<?> getDailyCommit(@PathVariable String id){
+        Map<String,Object> commit = new HashMap<String, Object>();
+
+        commit.put("date", "2020-10-21");
+        commit.put("continue", 100);
+        commit.put("daily", true);
+        commit.put("user", "user_id");
+
+        String jsonString = new GsonBuilder().setPrettyPrinting().create().toJson(commit);
+
+        return new ResponseEntity<>(jsonString, HttpStatus.OK);
     }
 }

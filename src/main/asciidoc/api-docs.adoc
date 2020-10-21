@@ -22,3 +22,10 @@ include::{snippets}/main-controller-test/테스트_테스트_코드/http-request
 include::{snippets}/main-controller-test/테스트_테스트_코드/request-parameters.adoc[]
 include::{snippets}/main-controller-test/테스트_테스트_코드/http-response.adoc[]
 include::{snippets}/main-controller-test/테스트_테스트_코드/response-fields.adoc[]
+
+== 커밋 체크
+include::{snippets}/main-controller-test/커밋_테스트/curl-request.adoc[]
+include::{snippets}/main-controller-test/커밋_테스트/http-request.adoc[]
+include::{snippets}/main-controller-test/커밋_테스트/path-parameters.adoc[]
+include::{snippets}/main-controller-test/커밋_테스트/http-response.adoc[]
+include::{snippets}/main-controller-test/커밋_테스트/response-fields.adoc[]

@@ -163,7 +163,7 @@ public class MainControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("cnt", "5")
                 .accept(MediaType.APPLICATION_JSON))
-            // .andDo(print())
+            .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("test", is(true)))
             ;
@@ -198,4 +198,27 @@ public class MainControllerTest {
     }
 
 
+    @Test
+    public void 커밋_테스트() throws Exception{
+        mockMvc.perform(
+            get("/api/products/dailycommit/{id}", "user_id")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document.document(
+                    pathParameters(
+                        parameterWithName("id").description("github_id")
+                    ),
+                    responseFields(
+                        fieldWithPath("date").description("요청일"),
+                        fieldWithPath("continue").type(Integer.class).description("연속일수"),
+                        fieldWithPath("daily").type(Boolean.class).description("오늘 커밋 여부"),
+                        fieldWithPath("user").description("유저id")
+                    )
+                ))
+                .andExpect(jsonPath("user", is("user_id")))
+                .andExpect(jsonPath("date", is("2020-10-21")))
+                .andExpect(jsonPath("continue", is(100)))
+                .andExpect(jsonPath("daily", is(true)));
+    }
 }
