@@ -65,7 +65,7 @@ public class MainControllerTest {
         );
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
         .apply(documentationConfiguration(this.restDocumentation)
-        .uris().withScheme("https").withHost("test.com").withPort(443))
+        .uris().withScheme("http").withHost("localhost").withPort(8080))
         .alwaysDo(document)
         .build();
     }
@@ -98,6 +98,7 @@ public class MainControllerTest {
         ));
     }
 
+    //#region 상품조회
     @Test
     public void 상품_조회() throws Exception{
         mockMvc.perform(
@@ -121,6 +122,7 @@ public class MainControllerTest {
             .andExpect(jsonPath("desc", is(notNullValue())))
             .andExpect(jsonPath("quantity", is(notNullValue())));
     }
+    //#endregion
     
     @Test
     public void 상품_리스트_조회() throws Exception {
